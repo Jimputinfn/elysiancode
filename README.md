@@ -1,6 +1,6 @@
 # Elysian Code
 
-A modern, cross-platform desktop IDE built for [ElysianNodes](https://elysiannodes.uk), powered by Electron + Monaco Editor.
+A modern, cross-platform desktop IDE by [ElysianNodes](https://elysiannodes.uk), powered by Electron + Monaco Editor.
 
 ![Elysian Code](assets/icons/icon.png)
 

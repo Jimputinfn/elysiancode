@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog, shell } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
+const { spawn, exec } = require('child_process');
 
 // Keep a global reference to prevent GC
 let mainWindow;
@@ -227,4 +228,51 @@ ipcMain.handle('terminal:resize', (event, termId, cols, rows) => {
 ipcMain.handle('terminal:kill', (event, termId) => {
   const pty = terminals.get(termId);
   if (pty) { pty.kill(); terminals.delete(termId); }
+});
+
+// ─── IPC: Git ────────────────────────────────────────────────────────────────
+
+function runGitCommand(command, cwd) {
+  return new Promise((resolve, reject) => {
+    exec(`git ${command}`, { cwd }, (error, stdout, stderr) => {
+      if (error) {
+        resolve({ error: error.message, stderr });
+      } else {
+        resolve({ stdout: stdout.trim(), stderr });
+      }
+    });
+  });
+}
+
+ipcMain.handle('git:status', (event, cwd) => {
+  return runGitCommand('status --porcelain', cwd);
+});
+
+ipcMain.handle('git:add', (event, files, cwd) => {
+  const filesStr = Array.isArray(files) ? files.join(' ') : files;
+  return runGitCommand(`add ${filesStr}`, cwd);
+});
+
+ipcMain.handle('git:commit', (event, message, cwd) => {
+  return runGitCommand(`commit -m "${message}"`, cwd);
+});
+
+ipcMain.handle('git:push', (event, remote = 'origin', branch = 'main', cwd) => {
+  return runGitCommand(`push ${remote} ${branch}`, cwd);
+});
+
+ipcMain.handle('git:pull', (event, remote = 'origin', branch = 'main', cwd) => {
+  return runGitCommand(`pull ${remote} ${branch}`, cwd);
+});
+
+ipcMain.handle('git:branch', (event, cwd) => {
+  return runGitCommand('branch --show-current', cwd);
+});
+
+ipcMain.handle('git:log', (event, cwd) => {
+  return runGitCommand('log --oneline -10', cwd);
+});
+
+ipcMain.handle('git:init', (event, cwd) => {
+  return runGitCommand('init', cwd);
 });

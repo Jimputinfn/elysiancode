@@ -28,6 +28,154 @@
 
   --font-ui:         'Segoe UI', system-ui, -apple-system, sans-serif;
   --font-mono:       'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+}
+
+/* Light theme */
+[data-theme="light"] {
+  --bg-base:         #ffffff;
+  --bg-sidebar:      #f3f3f3;
+  --bg-panel:        #f3f3f3;
+  --bg-tab-bar:      #f3f3f3;
+  --bg-tab-active:   #ffffff;
+  --bg-tab-inactive: #e8e8e8;
+  --bg-tab-hover:    #e8e8e8;
+  --bg-input:        #ffffff;
+  --bg-dropdown:     #f3f3f3;
+  --bg-highlight:    #e8e8e8;
+  --bg-selection:    #add6ff;
+  --bg-statusbar:    #007acc;
+  --bg-activity:     #e8e8e8;
+
+  --fg-primary:      #333333;
+  --fg-secondary:    #666666;
+  --fg-muted:        #9d9d9d;
+  --fg-accent:       #0066cc;
+  --fg-white:        #ffffff;
+  --fg-error:        #d14c41;
+  --fg-warning:      #cca700;
+  --fg-success:      #488647;
+
+  --border:          #e0e0e0;
+  --border-light:    #d0d0d0;
+}
+
+/* Midnight theme */
+[data-theme="midnight"] {
+  --bg-base:         #0a0a0a;
+  --bg-sidebar:      #0f0f0f;
+  --bg-panel:        #0f0f0f;
+  --bg-tab-bar:      #1a1a1a;
+  --bg-tab-active:   #0a0a0a;
+  --bg-tab-inactive: #1a1a1a;
+  --bg-tab-hover:    #151515;
+  --bg-input:        #1a1a1a;
+  --bg-dropdown:     #0f0f0f;
+  --bg-highlight:    #151515;
+  --bg-selection:    #1e3a5f;
+  --bg-statusbar:    #005a9e;
+  --bg-activity:     #1a1a1a;
+
+  --fg-primary:      #e0e0e0;
+  --fg-secondary:    #b0b0b0;
+  --fg-muted:        #808080;
+  --fg-accent:       #66b3ff;
+  --fg-white:        #ffffff;
+  --fg-error:        #ff6b6b;
+  --fg-warning:      #ffd93d;
+  --fg-success:      #6bcf7f;
+
+  --border:          #2a2a2a;
+  --border-light:    #333333;
+}
+
+/* Ocean theme */
+[data-theme="ocean"] {
+  --bg-base:         #0f1f2e;
+  --bg-sidebar:      #152a3a;
+  --bg-panel:        #152a3a;
+  --bg-tab-bar:      #1a2f3f;
+  --bg-tab-active:   #0f1f2e;
+  --bg-tab-inactive: #1a2f3f;
+  --bg-tab-hover:    #1f3444;
+  --bg-input:        #1a2f3f;
+  --bg-dropdown:     #152a3a;
+  --bg-highlight:    #1f3444;
+  --bg-selection:    #2a4a6a;
+  --bg-statusbar:    #0088cc;
+  --bg-activity:     #1a2f3f;
+
+  --fg-primary:      #d0e0f0;
+  --fg-secondary:    #a0b0c0;
+  --fg-muted:        #708090;
+  --fg-accent:       #4da6ff;
+  --fg-white:        #ffffff;
+  --fg-error:        #ff7b7b;
+  --fg-warning:      #ffcc44;
+  --fg-success:      #5cb85c;
+
+  --border:          #2a4a6a;
+  --border-light:    #355a7a;
+}
+
+/* Forest theme */
+[data-theme="forest"] {
+  --bg-base:         #1a2f1a;
+  --bg-sidebar:      #1f3a1f;
+  --bg-panel:        #1f3a1f;
+  --bg-tab-bar:      #244324;
+  --bg-tab-active:   #1a2f1a;
+  --bg-tab-inactive: #244324;
+  --bg-tab-hover:    #2a4d2a;
+  --bg-input:        #244324;
+  --bg-dropdown:     #1f3a1f;
+  --bg-highlight:    #2a4d2a;
+  --bg-selection:    #3a5f3a;
+  --bg-statusbar:    #2d5a2d;
+  --bg-activity:     #244324;
+
+  --fg-primary:      #d0e8d0;
+  --fg-secondary:    #a8c8a8;
+  --fg-muted:        #80a080;
+  --fg-accent:       #66d966;
+  --fg-white:        #ffffff;
+  --fg-error:        #ff9999;
+  --fg-warning:      #ffdd66;
+  --fg-success:      #66cc66;
+
+  --border:          #3a5f3a;
+  --border-light:    #4a6f4a;
+}
+
+/* Sunset theme */
+[data-theme="sunset"] {
+  --bg-base:         #2a1f1a;
+  --bg-sidebar:      #3a2a1f;
+  --bg-panel:        #3a2a1f;
+  --bg-tab-bar:      #4a3a2a;
+  --bg-tab-active:   #2a1f1a;
+  --bg-tab-inactive: #4a3a2a;
+  --bg-tab-hover:    #5a4a3a;
+  --bg-input:        #4a3a2a;
+  --bg-dropdown:     #3a2a1f;
+  --bg-highlight:    #5a4a3a;
+  --bg-selection:    #6a5a4a;
+  --bg-statusbar:    #cc6633;
+  --bg-activity:     #4a3a2a;
+
+  --fg-primary:      #f0e0d0;
+  --fg-secondary:    #c8b8a8;
+  --fg-muted:        #a09080;
+  --fg-accent:       #ff9966;
+  --fg-white:        #ffffff;
+  --fg-error:        #ffaaaa;
+  --fg-warning:      #ffcc88;
+  --fg-success:      #ccaa66;
+
+  --border:          #5a4a3a;
+  --border-light:    #6a5a4a;
+}
+
+:root {
   --font-size-ui:    13px;
   --font-size-small: 11px;
 
@@ -69,7 +217,7 @@ a      { color: inherit; text-decoration: none; cursor: pointer; }
 /* ── Title Bar ─────────────────────────────────────────────────────────────── */
 #titlebar {
   height: var(--titlebar-height);
-  background: #252526;
+  background: var(--bg-sidebar);
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -342,6 +490,116 @@ a      { color: inherit; text-decoration: none; cursor: pointer; }
   position: relative;
 }
 
+/* Monaco editor widgets (find, replace, etc.) */
+.monaco-editor .monaco-editor-overlay {
+  background: var(--bg-dropdown) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3) !important;
+}
+
+.monaco-editor .find-widget {
+  background: var(--bg-dropdown) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+
+.monaco-editor .find-widget .monaco-inputbox {
+  background: var(--bg-input) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--fg-primary) !important;
+}
+
+.monaco-editor .find-widget .monaco-inputbox .input {
+  color: var(--fg-primary) !important;
+  background: transparent !important;
+}
+
+.monaco-editor .find-widget .button {
+  background: var(--bg-tab-bar) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--fg-secondary) !important;
+  cursor: pointer !important;
+  padding: 4px 8px !important;
+  min-width: 20px !important;
+  height: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 2px !important;
+}
+
+.monaco-editor .find-widget .button:hover {
+  background: var(--bg-highlight) !important;
+  color: var(--fg-primary) !important;
+}
+
+.monaco-editor .find-widget .button.disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+/* More specific button selectors */
+.monaco-editor .find-widget .codicon {
+  color: var(--fg-secondary) !important;
+  font-size: 14px !important;
+}
+
+.monaco-editor .find-widget .button:hover .codicon {
+  color: var(--fg-primary) !important;
+}
+
+.monaco-editor .find-widget .close-button {
+  background: var(--bg-tab-bar) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--fg-secondary) !important;
+  cursor: pointer !important;
+  padding: 4px !important;
+  min-width: 20px !important;
+  height: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 2px !important;
+}
+
+.monaco-editor .find-widget .close-button:hover {
+  background: var(--bg-highlight) !important;
+  color: var(--fg-primary) !important;
+}
+
+.monaco-editor .find-widget .monaco-button {
+  background: var(--bg-tab-bar) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--fg-secondary) !important;
+  cursor: pointer !important;
+  padding: 4px 8px !important;
+  min-width: 20px !important;
+  height: 20px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 2px !important;
+}
+
+.monaco-editor .find-widget .monaco-button:hover {
+  background: var(--bg-highlight) !important;
+  color: var(--fg-primary) !important;
+}
+
+.monaco-editor .find-widget .matchesCount {
+  color: var(--fg-muted) !important;
+}
+
+.monaco-editor .find-widget .monaco-checkbox .checkbox {
+  border: 1px solid var(--border) !important;
+  background: var(--bg-input) !important;
+}
+
+.monaco-editor .find-widget .monaco-checkbox .checkbox:checked {
+  background: var(--fg-accent) !important;
+  border-color: var(--fg-accent) !important;
+}
+
 /* ── Terminal ──────────────────────────────────────────────────────────────── */
 #terminal-panel {
   display: flex; flex-direction: column;
@@ -481,10 +739,10 @@ a      { color: inherit; text-decoration: none; cursor: pointer; }
   transition: width 0.2s ease, height 0.2s ease;
 }
 .modal.webview-expanded {
-  width: 800px;
-  max-width: 95vw;
-  height: 80vh;
-  max-height: 80vh;
+  width: 98vw;
+  max-width: 98vw;
+  height: 95vh;
+  max-height: 95vh;
 }
 .modal-header {
   display: flex; align-items: center; justify-content: space-between;
@@ -526,6 +784,20 @@ a      { color: inherit; text-decoration: none; cursor: pointer; }
   font-size: 11px; color: var(--fg-muted); overflow: hidden;
   text-overflow: ellipsis; white-space: nowrap;
 }
+.login-webview-panel {
+  width: 100%; 
+  height: calc(100% - 40px); /* Full height minus toolbar */
+  border: none;
+  flex: 1;
+}
+
+.login-panel-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
 .login-webview {
   width: 100%; 
   height: calc(100% - 40px); /* Full height minus toolbar */
@@ -539,6 +811,123 @@ a      { color: inherit; text-decoration: none; cursor: pointer; }
   flex-direction: column;
   height: 100%;
   width: 100%;
+}
+
+/* ── Git Panel ─────────────────────────────────────────────────────────────── */
+.git-panel-content {
+  padding: 16px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.git-loading {
+  text-align: center;
+  padding: 20px;
+  color: var(--fg-muted);
+}
+
+.git-no-repo {
+  text-align: center;
+  padding: 20px;
+}
+
+.git-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.git-branch {
+  font-weight: 600;
+  color: var(--fg-accent);
+}
+
+.git-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.git-section {
+  margin-bottom: 20px;
+}
+
+.git-section h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 8px;
+}
+
+.git-group {
+  margin-bottom: 12px;
+}
+
+.git-group strong {
+  font-size: 12px;
+  color: var(--fg-secondary);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.git-file {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 3px;
+  margin-bottom: 2px;
+}
+
+.git-file.staged {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
+}
+
+.git-file.modified {
+  background: rgba(255, 152, 0, 0.1);
+  color: #ff9800;
+}
+
+.git-file.untracked {
+  background: rgba(33, 150, 243, 0.1);
+  color: #2196f3;
+}
+
+.git-file.deleted {
+  background: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+}
+
+.btn-small {
+  background: var(--bg-tab-bar);
+  border: 1px solid var(--border);
+  color: var(--fg-secondary);
+  padding: 2px 6px;
+  font-size: 10px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.btn-small:hover {
+  background: var(--bg-highlight);
+  color: var(--fg-primary);
+}
+
+#commit-message {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--fg-primary);
+  padding: 8px;
+  border-radius: 3px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  resize: vertical;
+  margin-bottom: 8px;
 }
 
 /* ── Settings Panel ─────────────────────────────────────────────────────────── */

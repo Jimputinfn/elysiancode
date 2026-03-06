@@ -40,5 +40,17 @@ contextBridge.exposeInMainWorld('electronAPI', {
       ipcRenderer.once(channel, listener);
       return () => ipcRenderer.removeListener(channel, listener);
     }
+  },
+
+  // ─── Git ───────────────────────────────────────────────────────────────────
+  git: {
+    status: (cwd) => ipcRenderer.invoke('git:status', cwd),
+    add: (files, cwd) => ipcRenderer.invoke('git:add', files, cwd),
+    commit: (message, cwd) => ipcRenderer.invoke('git:commit', message, cwd),
+    push: (remote, branch, cwd) => ipcRenderer.invoke('git:push', remote, branch, cwd),
+    pull: (remote, branch, cwd) => ipcRenderer.invoke('git:pull', remote, branch, cwd),
+    branch: (cwd) => ipcRenderer.invoke('git:branch', cwd),
+    log: (cwd) => ipcRenderer.invoke('git:log', cwd),
+    init: (cwd) => ipcRenderer.invoke('git:init', cwd),
   }
 });

@@ -35,6 +35,18 @@ const Terminal = {
   },
 
   async create(cwd) {
+    // Wait for xterm to be available
+    if (!window.Terminal || !window.FitAddon) {
+      await new Promise(resolve => {
+        const checkInterval = setInterval(() => {
+          if (window.Terminal && window.FitAddon) {
+            clearInterval(checkInterval);
+            resolve();
+          }
+        }, 100);
+      });
+    }
+
     const result = await window.electronAPI.terminal.create(cwd || App.state.openFolder);
     if (result?.error) { showToast(`Terminal error: ${result.error}`); return; }
 
@@ -70,7 +82,7 @@ const Terminal = {
       allowTransparency: false,
     });
 
-    const fitAddon = new window.FitAddon.FitAddon();
+    const fitAddon = new window.FitAddon();
     xterm.loadAddon(fitAddon);
 
     // Create DOM wrapper

@@ -20,6 +20,7 @@ const App = {
     this.initLoginModal();
     this.initAIPanel();
     this.initStatusBar();
+    Git.init(); // Initialize Git integration
 
     // Check first-launch login prompt
     this.checkFirstLaunch();
@@ -69,9 +70,8 @@ const App = {
     };
 
     btnLogin.addEventListener('click', () => {
-      modalBody.classList.add('hidden');
-      webviewContainer.classList.remove('hidden');
-      modal.querySelector('.modal').classList.add('webview-expanded');
+      dismiss();
+      this.toggleAI();
     });
 
     btnBack.addEventListener('click', () => {
@@ -164,17 +164,23 @@ const App = {
   initSettings() {
     // Retrigger login button
     document.getElementById('btn-relogin').addEventListener('click', () => {
-      // Clear the login seen flag so modal shows again
-      localStorage.removeItem('elysian_login_seen');
-      // Show the login modal
-      document.getElementById('login-modal').classList.remove('hidden');
-      // Reset modal state
-      const modal = document.getElementById('login-modal');
-      const modalBody = modal.querySelector('.modal-body');
-      const webviewContainer = document.getElementById('login-webview-container');
-      webviewContainer.classList.add('hidden');
-      modalBody.classList.remove('hidden');
-      modal.querySelector('.modal').classList.remove('webview-expanded');
+      this.toggleAI();
+    });
+
+    // Panel webview navigation
+    const panelWebview = document.getElementById('login-webview-panel');
+    const panelBackBtn = document.getElementById('webview-back-panel');
+    const panelUrlSpan = document.getElementById('webview-url-panel');
+
+    panelWebview.addEventListener('did-navigate', (e) => {
+      panelUrlSpan.textContent = e.url;
+      panelBackBtn.style.display = panelWebview.canGoBack() ? 'block' : 'none';
+    });
+
+    panelBackBtn.addEventListener('click', () => {
+      if (panelWebview.canGoBack()) {
+        panelWebview.goBack();
+      }
     });
 
     // Auto-open project toggle
@@ -196,13 +202,29 @@ const App = {
       Editor.instance?.updateOptions({ fontSize: parseInt(size) });
     });
 
-    // Theme selector (placeholder for now)
+    // Theme selector
     document.getElementById('theme-select').addEventListener('change', (e) => {
-      showToast('Theme switching coming soon');
+      this.switchTheme(e.target.value);
     });
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('elysian_theme') || 'dark';
+    document.getElementById('theme-select').value = savedTheme;
+    this.switchTheme(savedTheme);
 
     // Load app version
     this.loadAppVersion();
+  },
+
+  switchTheme(theme) {
+    localStorage.setItem('elysian_theme', theme);
+    document.body.setAttribute('data-theme', theme);
+    
+    // Update Monaco editor theme
+    if (Editor.instance) {
+      const monacoTheme = theme === 'light' ? 'vs' : 'vs-dark';
+      monaco.editor.setTheme(monacoTheme);
+    }
   },
 
   async loadAppVersion() {

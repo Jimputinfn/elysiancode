@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://billing.elysiannodes.uk;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data: https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self' https://billing.elysiannodes.uk; worker-src 'self' blob:; child-src 'self' blob:;">
   <title>Elysian Code</title>
   <link rel="stylesheet" href="css/main.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/xterm/5.3.0/xterm.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css" />
 </head>
 <body>
 
@@ -157,7 +157,25 @@
       <div id="panel-git" class="sidebar-panel hidden">
         <div class="panel-header"><span>SOURCE CONTROL</span></div>
         <div class="git-panel-content">
-          <p class="muted">Git integration coming soon.</p>
+          <div class="git-loading">
+            <p>Loading Git status...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Login Panel -->
+      <div id="panel-login" class="sidebar-panel hidden">
+        <div class="panel-header"><span>LOGIN</span></div>
+        <div class="login-panel-content">
+          <div class="webview-toolbar">
+            <button id="webview-back-panel">‹ Back</button>
+            <span id="webview-url-panel">https://billing.elysiannodes.uk/login</span>
+          </div>
+          <webview id="login-webview-panel"
+            src="https://billing.elysiannodes.uk/login"
+            class="login-webview-panel"
+            partition="persist:elysian">
+          </webview>
         </div>
       </div>
 
@@ -187,6 +205,10 @@
               <select id="theme-select">
                 <option value="dark">Dark</option>
                 <option value="light">Light</option>
+                <option value="midnight">Midnight</option>
+                <option value="ocean">Ocean</option>
+                <option value="forest">Forest</option>
+                <option value="sunset">Sunset</option>
               </select>
             </div>
             <div class="settings-item">
@@ -200,7 +222,7 @@
             <div class="credits-content">
               <div class="credits-item">
                 <strong>Elysian Code</strong>
-                <p>A modern desktop IDE built for ElysianNodes</p>
+                <p>A modern desktop IDE by ElysianNodes</p>
               </div>
               <div class="credits-item">
                 <strong>Community</strong>
@@ -260,7 +282,7 @@
             </svg>
           </div>
           <h1>Elysian Code</h1>
-          <p class="welcome-sub">A code editor built for ElysianNodes</p>
+          <p class="welcome-sub">A code editor by ElysianNodes</p>
           <div class="welcome-actions">
             <div class="welcome-section">
               <h3>Start</h3>
@@ -364,8 +386,8 @@
   </div>
 
   <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/5.3.0/xterm.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/5.3.0/addon-fit.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@xterm/addon-fit@0.8.0/lib/addon-fit.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/fileicons.js"></script>
@@ -373,6 +395,7 @@
   <script src="js/tabs.js"></script>
   <script src="js/editor.js"></script>
   <script src="js/terminal.js"></script>
+  <script src="js/git.js"></script>
   <script src="js/search.js"></script>
   <script src="js/menus.js"></script>
   <script src="js/app.js"></script>

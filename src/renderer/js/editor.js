@@ -95,6 +95,9 @@ const Editor = {
         this.instance.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Backquote, () => {
           Terminal.toggle();
         });
+        this.instance.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyK, () => {
+          App.toggleAI();
+        });
   },
 
   setContent(content, language, filePath) {
