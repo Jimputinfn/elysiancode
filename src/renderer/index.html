@@ -59,6 +59,7 @@
       <span class="menu-item" data-menu="edit">Edit</span>
       <span class="menu-item" data-menu="view">View</span>
       <span class="menu-item" data-menu="terminal">Terminal</span>
+      <span class="menu-item" data-menu="help">Help</span>
     </div>
     <div class="titlebar-controls" id="titlebar-controls">
       <span id="title-filename"></span>
@@ -89,6 +90,13 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
           <path d="M6 9v3m0 0v3m0-3h8a2 2 0 012 2v1"/>
+        </svg>
+      </button>
+      <button class="activity-btn" data-panel="backup" title="Backups">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+          <line x1="12" y1="22.08" x2="12" y2="12"/>
         </svg>
       </button>
       <div class="activity-spacer"></div>
@@ -160,6 +168,31 @@
           <div class="git-loading">
             <p>Loading Git status...</p>
           </div>
+        </div>
+      </div>
+
+      <!-- Backup Panel -->
+      <div id="panel-backup" class="sidebar-panel hidden">
+        <div class="panel-header">
+          <span>BACKUPS</span>
+          <div class="panel-actions">
+            <button class="icon-btn" onclick="Backup.refreshBackups()" title="Refresh Backups">
+              ↻
+            </button>
+            <button class="icon-btn" onclick="Backup.showCreateBackupDialog()" title="Create Backup">
+              +
+            </button>
+          </div>
+        </div>
+        <div class="backup-panel-content">
+          <div class="backup-loading">
+            <div class="spinner"></div>
+            <p>Loading backups...</p>
+          </div>
+          
+          <div id="backup-stats" class="backup-stats" style="display: none;"></div>
+          
+          <div id="backup-list" class="backup-list" style="display: none;"></div>
         </div>
       </div>
 
@@ -397,6 +430,8 @@
   <script src="js/terminal.js"></script>
   <script src="js/git.js"></script>
   <script src="js/search.js"></script>
+  <script src="js/backup.js"></script>
+  <script src="js/updater.js"></script>
   <script src="js/menus.js"></script>
   <script src="js/app.js"></script>
 </body>

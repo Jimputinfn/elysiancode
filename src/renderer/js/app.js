@@ -21,6 +21,8 @@ const App = {
     this.initAIPanel();
     this.initStatusBar();
     Git.init(); // Initialize Git integration
+    Updater.init(); // Initialize update checker
+    Backup.init(); // Initialize backup manager
 
     // Check first-launch login prompt
     this.checkFirstLaunch();
@@ -136,6 +138,13 @@ const App = {
         } else {
           if (!this.state.sidebarVisible) this.showSidebar();
           this.showSidebarPanel(panel);
+          
+          // Refresh backups when backup panel is shown
+          if (panel === 'backup' && window.Backup) {
+            setTimeout(() => {
+              window.Backup.refreshBackups();
+            }, 100);
+          }
         }
       });
     });

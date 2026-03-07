@@ -73,6 +73,11 @@ const AppMenus = {
       { label: 'Kill Terminal',    shortcut: '',               action: () => Terminal.killActive() },
       { label: 'Toggle Terminal',  shortcut: 'Ctrl+`',         action: () => Terminal.toggle() },
     ],
+    help: [
+      { label: 'Check for Updates...', shortcut: '', action: () => Updater.checkForUpdates(true) },
+      { separator: true },
+      { label: 'About Elysian Code', shortcut: '', action: () => this.showAbout() },
+    ],
   },
 
   init() {
@@ -122,5 +127,57 @@ const AppMenus = {
   close() {
     this.activeMenu = null;
     document.getElementById('menu-dropdown').classList.add('hidden');
+  },
+
+  showAbout() {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+      <div class="modal" style="max-width: 400px;">
+        <div class="modal-header">
+          <h3>About Elysian Code</h3>
+          <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" style="margin-bottom: 10px;">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#4fc3f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h2>Elysian Code</h2>
+            <p style="color: #999; margin: 5px 0;">Version: <span id="about-version">Loading...</span></p>
+          </div>
+          <p>A modern, cross-platform desktop IDE by ElysianNodes, powered by Electron + Monaco Editor.</p>
+          <div style="margin-top: 15px; font-size: 0.9em; color: #999;">
+            <p>© 2025 ElysianNodes</p>
+            <p>License: MIT</p>
+            <p><a href="https://github.com/elysiannodes/elysian-code" target="_blank" style="color: #4fc3f7;">GitHub Repository</a></p>
+          </div>
+          <div style="margin-top: 20px;">
+            <button class="btn btn-primary" onclick="this.closest('.modal-overlay').remove()">OK</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Load version info
+    Updater.getCurrentVersion().then(version => {
+      const versionEl = document.getElementById('about-version');
+      if (versionEl && version) {
+        versionEl.textContent = `v${version}`;
+      }
+    });
+
+    // Event listeners
+    modal.querySelector('.modal-close').addEventListener('click', () => {
+      document.body.removeChild(modal);
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        document.body.removeChild(modal);
+      }
+    });
   }
 };

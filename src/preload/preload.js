@@ -52,5 +52,22 @@ contextBridge.exposeInMainWorld('electronAPI', {
     branch: (cwd) => ipcRenderer.invoke('git:branch', cwd),
     log: (cwd) => ipcRenderer.invoke('git:log', cwd),
     init: (cwd) => ipcRenderer.invoke('git:init', cwd),
+  },
+
+  // ─── Update Checker ──────────────────────────────────────────────────────────
+  updater: {
+    check: () => ipcRenderer.invoke('updater:check'),
+    forceCheck: () => ipcRenderer.invoke('updater:forceCheck'),
+    getCurrentVersion: () => ipcRenderer.invoke('updater:getCurrentVersion'),
+  },
+
+  // ─── Backup Manager ───────────────────────────────────────────────────────────
+  backup: {
+    create: (folderPath, options) => ipcRenderer.invoke('backup:create', folderPath, options),
+    list: () => ipcRenderer.invoke('backup:list'),
+    restore: (backupId, targetPath) => ipcRenderer.invoke('backup:restore', backupId, targetPath),
+    delete: (backupId) => ipcRenderer.invoke('backup:delete', backupId),
+    getStats: () => ipcRenderer.invoke('backup:getStats'),
+    selectRestoreFolder: () => ipcRenderer.invoke('backup:selectRestoreFolder'),
   }
 });

@@ -3,9 +3,13 @@ const path = require('path');
 const fs = require('fs');
 const os = require('os');
 const { spawn, exec } = require('child_process');
+const UpdateChecker = require('./updateChecker');
+const BackupManager = require('./backupManager');
 
 // Keep a global reference to prevent GC
 let mainWindow;
+let updateChecker;
+let backupManager;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -13,13 +17,13 @@ function createWindow() {
     height: 900,
     minWidth: 800,
     minHeight: 600,
-    backgroundColor: '#1e1e1e',
-    titleBarStyle: process.platform === 'linux' ? 'default' : 'hidden',
-    titleBarOverlay: process.platform !== 'linux' ? {
-      color: '#252526',
-      symbolColor: '#cccccc',
-      height: 32
-    } : false,
+    backgroundColor: '#0d1117', // Updated to match new theme
+    titleBarStyle: 'hidden', // Use custom title bar on all platforms
+    titleBarOverlay: {
+      color: '#161b22', // Updated to match new theme
+      symbolColor: '#f0f6fc', // Updated to match new theme
+      height: 36 // Updated to match new titlebar height
+    },
     frame: true,
     show: false,
     icon: path.join(__dirname, '../../assets/icons/icon.png'),
@@ -47,7 +51,14 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  updateChecker = new UpdateChecker();
+  backupManager = new BackupManager();
   createWindow();
+  
+  // Hide the default menu bar
+  if (process.platform !== 'darwin') {
+    mainWindow.setMenuBarVisibility(false);
+  }
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
@@ -275,4 +286,70 @@ ipcMain.handle('git:log', (event, cwd) => {
 
 ipcMain.handle('git:init', (event, cwd) => {
   return runGitCommand('init', cwd);
+});
+
+// ─── IPC: Update Checker ──────────────────────────────────────────────────────
+
+ipcMain.handle('updater:check', async () => {
+  if (!updateChecker) {
+    return { error: 'Update checker not initialized' };
+  }
+  return await updateChecker.checkForUpdates();
+});
+
+ipcMain.handle('updater:forceCheck', async () => {
+  if (!updateChecker) {
+    return { error: 'Update checker not initialized' };
+  }
+  return await updateChecker.forceCheckForUpdates();
+});
+
+ipcMain.handle('updater:getCurrentVersion', () => {
+  return updateChecker ? updateChecker.currentVersion : null;
+});
+
+// ─── IPC: Backup Manager ───────────────────────────────────────────────────────
+
+ipcMain.handle('backup:create', async (event, folderPath, options) => {
+  if (!backupManager) {
+    return { error: 'Backup manager not initialized' };
+  }
+  return await backupManager.createBackup(folderPath, options);
+});
+
+ipcMain.handle('backup:list', async () => {
+  if (!backupManager) {
+    return { error: 'Backup manager not initialized' };
+  }
+  return await backupManager.listBackups();
+});
+
+ipcMain.handle('backup:restore', async (event, backupId, targetPath) => {
+  if (!backupManager) {
+    return { error: 'Backup manager not initialized' };
+  }
+  return await backupManager.restoreBackup(backupId, targetPath);
+});
+
+ipcMain.handle('backup:delete', async (event, backupId) => {
+  if (!backupManager) {
+    return { error: 'Backup manager not initialized' };
+  }
+  return await backupManager.deleteBackup(backupId);
+});
+
+ipcMain.handle('backup:getStats', async () => {
+  if (!backupManager) {
+    return { error: 'Backup manager not initialized' };
+  }
+  return await backupManager.getBackupStats();
+});
+
+ipcMain.handle('backup:selectRestoreFolder', async () => {
+  const result = await dialog.showOpenDialog(mainWindow, {
+    properties: ['openDirectory'],
+    title: 'Select folder to restore backup to'
+  });
+  if (result.canceled || !result.filePaths.length) return null;
+  return result.filePaths[0];
 });
